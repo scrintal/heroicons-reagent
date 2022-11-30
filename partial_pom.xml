@@ -9,6 +9,9 @@
     <description>heroicons-reagent is a library containing all the SVGs from heroicons converted into reagent components.</description>
     <url>https://github.com/scrintal/heroicons-reagent</url>
     <scm>
+        <url>https://github.com/scrintal/heroicons-reagent</url>
+        <connection>scm:git:git://github.com/scrintal/heroicons-reagent.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/scrintal/heroicons-reagent.git</developerConnection>
         <tag></tag>
     </scm>
 </project>
