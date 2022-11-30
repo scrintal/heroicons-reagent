@@ -1,0 +1,11 @@
+{:paths   ["src"]
+ :deps    {}
+
+ :aliases {:build {:extra-paths ["build"]
+                   :ns-default  build
+                   :extra-deps  {org.clj-commons/hickory {:mvn/version "0.7.3"}
+                                 org.clojure/clojure     {:mvn/version "1.11.1"}
+                                 org.clojure/tools.build {:git/tag "v0.8.5"
+                                                          :git/sha "9c738da"
+                                                          :git/url "https://github.com/clojure/tools.build"}
+                                 zprint/zprint           {:mvn/version "1.2.4"}}}}}
