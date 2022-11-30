@@ -8,4 +8,7 @@
                                  org.clojure/tools.build {:git/tag "v0.8.5"
                                                           :git/sha "9c738da"
                                                           :git/url "https://github.com/clojure/tools.build"}
+                                 org.corfield/build-clj  {:git/tag "v0.8.5"
+                                                          :git/sha "de693d0"
+                                                          :git/url "https://github.com/seancorfield/build-clj"}
                                  zprint/zprint           {:mvn/version "1.2.4"}}}}}
