@@ -5,7 +5,7 @@
 A library containing all the SVGs from [heroicons](https://github.com/tailwindlabs/heroicons)
 converted into [reagent](https://github.com/reagent-project/reagent) components.
 
-## Intallation
+## Installation
 Add the dependency to your `deps.edn` from Clojars:
 ```clojure
   com.scrintal/heroicons-reagent {:mvn/version "2.0.13"}
