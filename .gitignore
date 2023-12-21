@@ -7,3 +7,13 @@
 
 target
 /heroicons
+
+# clojure-lsp
+.lsp
+output.calva-repl
+.clj-kondo/*
+!.clj-kondo/config.edn
+clojure-lsp*
+
+# Portal
+**/.portal
