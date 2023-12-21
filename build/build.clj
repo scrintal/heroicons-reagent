@@ -129,16 +129,16 @@
   (convert/convert heroicons-dir "src")
 
   ; Builds a new version if needed
-  (build)
+  (build {})
 
   ; Creates a new jar from the latest builds a new version if needed
-  (jar)
+  (jar {})
 
   ; Creates a new jar and deploys it to the Clojars. Requires a Clojars deploy key
   ; to be available in the local environment.
-  (deploy)
+  (deploy {})
 
   ; Creates a new jar and installs it to the local maven.
-  (install)
+  (install {})
 
   nil)

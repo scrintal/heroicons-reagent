@@ -1,9 +1,10 @@
 (ns convert
   (:require [clojure.java.io :as io]
             [clojure.string :as str]
+            [clojure.walk :as walk]
             [hickory.core :as hickory]
-            [zprint.core :as zp]
-            [util :as util]))
+            [util :as util]
+            [zprint.core :as zp]))
 
 (defn new-line-str? [str]
   (and (string? str) (str/starts-with? str "\n")))
@@ -23,7 +24,7 @@
                        (hickory/parse-fragment)
                        (first)
                        (hickory/as-hiccup))]
-    (clojure.walk/postwalk
+    (walk/postwalk
       (fn [v]
         (cond
           (vector? v)
@@ -87,7 +88,14 @@
                          (filter util/svg?))
         mini-icons (->> (io/file (str input-dir "/optimized/20/solid"))
                         file-seq
-                        (filter util/svg?))]
+                        (filter util/svg?))
+        micro-icons (->> (io/file (str input-dir "/optimized/16/solid"))
+                         file-seq
+                         (filter util/svg?))]
+    (println "> Creating micro icons")
+    (doseq [icon micro-icons]
+      (save-icon-ns! output-dir "micro" icon))
+    
     (println "> Creating mini icons")
     (doseq [icon mini-icons]
       (save-icon-ns! output-dir "mini" icon))
