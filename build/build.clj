@@ -3,7 +3,8 @@
     [clojure.string :as str]
     [clojure.tools.build.api :as b]
     [convert :as convert]
-    [org.corfield.build :as bb]))
+    [org.corfield.build :as bb]
+    [util :as util]))
 
 (def lib 'com.scrintal/heroicons-reagent)
 (def target-dir "target")
