@@ -8,19 +8,19 @@ converted into [reagent](https://github.com/reagent-project/reagent) components.
 ## Installation
 Add the dependency to your `deps.edn` from Clojars:
 ```clojure
-  com.scrintal/heroicons-reagent {:mvn/version "2.0.13"}
+  com.scrintal/heroicons-reagent {:mvn/version "2.1.1"}
 ```
 
 or directly from GitHub:
 ```clojure
   com.scrintal/heroicons-reagent {:git/url "https://github.com/scrintal/heroicons-reagent"
-                                  :git/tag "v2.0.13"
-                                  :git/sha "c9a5296"}
+                                  :git/tag "v2.1.1"
+                                  :git/sha "87c780c"}
 ```
 
 or to your `shadow-cljs.edn`:
 ```clojure
-  [com.scrintal/heroicons-reagent "2.0.13"]
+  [com.scrintal/heroicons-reagent "2.1.1"]
 ```
 
 ## Usage
@@ -32,6 +32,32 @@ or to your `shadow-cljs.edn`:
   [:div
    [academic-cap/render]])
 
+```
+
+## Development
+
+### Building
+To build a new version matching the latest version of the Heroicons, simply run:
+```sh
+clj -T:build build
+```
+
+This will download the latest version of Heroicons, build a new version, commit the changes, and 
+tag the commit with the same version number as the Heroicons.
+
+### Install Locally
+To test the newly built library locally, use the following command:
+```sh
+clj - T:build install
+```
+
+This will install the latest version to your local Maven repository.
+
+### Deploying to Clojars
+After building a new version and testing it locally by installing it, the following command can be
+run to deploy the library to Clojars:
+```sh
+clj - T:build deploy
 ```
 
 ## License
