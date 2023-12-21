@@ -6,7 +6,8 @@
          :viewBox     "0 0 24 24"
          :strokeWidth "1.5"
          :stroke      "currentColor"
-         :aria-hidden "true"}
+         :aria-hidden "true"
+         :dataSlot    "icon"}
    [:path {:strokeLinecap "round"
            :strokeLinejoin "round"
-           :d "M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5"}]])
+           :d "m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5"}]])
