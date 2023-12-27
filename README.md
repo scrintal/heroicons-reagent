@@ -8,19 +8,19 @@ converted into [reagent](https://github.com/reagent-project/reagent) components.
 ## Installation
 Add the dependency to your `deps.edn` from Clojars:
 ```clojure
-  com.scrintal/heroicons-reagent {:mvn/version "2.1.1"}
+  com.scrintal/heroicons-reagent {:mvn/version "2.1.1-1"}
 ```
 
 or directly from GitHub:
 ```clojure
   com.scrintal/heroicons-reagent {:git/url "https://github.com/scrintal/heroicons-reagent"
-                                  :git/tag "v2.1.1"
-                                  :git/sha "87c780c"}
+                                  :git/tag "v2.1.1-1"
+                                  :git/sha "9a00cef"}
 ```
 
 or to your `shadow-cljs.edn`:
 ```clojure
-  [com.scrintal/heroicons-reagent "2.1.1"]
+  [com.scrintal/heroicons-reagent "2.1.1-1"]
 ```
 
 ## Usage
