@@ -45,8 +45,9 @@
 
 (defn needs-to-build? []
   (let [heroicons-version (latest-version heroicons-dir)
-        our-version (latest-version)]
-    (not= heroicons-version our-version)))
+        our-version (latest-version)
+        [version _override] (str/split our-version #"-")]
+    (not= heroicons-version version)))
 
 (defn switch-to-latest-version! []
   (let [latest-version (latest-version heroicons-dir)]
@@ -69,35 +70,44 @@
     {:git-command "git"
      :git-args    ["tag" tag-name]}))
 
-(defn build [_args]
-  (ensure-heroicons!)
-  (if (needs-to-build?)
-    (let [latest-version (switch-to-latest-version!)]
-      (convert/convert heroicons-dir "src")
-      (commit! latest-version)
-      (create-tag! latest-version))
-    (println "Latest version of heroicons is already built!")))
+(defn next-version []
+  (let [our-version (latest-version)
+        [version override] (str/split our-version #"-")]
+    (str version "-" (inc (or override 0)))))
 
-(defn jar [_args]
-  (if-let [our-version (latest-version)]
-    (let [version (subs our-version 1)
-          jar-file (format (str target-dir "/%s-%s.jar") (name lib) version)
-          opts {:class-dir class-dir
-                :jar-file  jar-file
-                :lib       lib
-                :basis     basis
-                :src-pom   "partial_pom.xml"
-                :version   version}]
-      (b/delete {:path target-dir})
-      (bb/jar opts)
-      (println jar-file "is ready.")
-      (b/copy-file {:src    (b/pom-path {:class-dir class-dir
-                                         :lib       lib})
-                    :target (str target-dir "/pom.xml")})
-      (-> opts
-          (assoc :pom-file (str target-dir "/pom.xml"))
-          (update :jar-file (comp #(.getCanonicalPath %) b/resolve-path))))
-    (throw (ex-info "No valid version! Run the build command first!" {}))))
+(defn build [{:keys [override-version?]}]
+  (ensure-heroicons!)
+  (let [needs-to-build? (needs-to-build?)]
+    (if (or needs-to-build? override-version?)
+      (let [latest-version (switch-to-latest-version!)
+            latest-version (if (and override-version? (not needs-to-build?))
+                             (next-version)
+                             latest-version)]
+        (convert/convert heroicons-dir "src")
+        (commit! latest-version)
+        (create-tag! latest-version))
+      (println "Latest version of heroicons is already built!"))))
+
+(defn jar [args]
+  (build args)
+  (let [our-version (latest-version)
+        version (subs our-version 1)
+        jar-file (format (str target-dir "/%s-%s.jar") (name lib) version)
+        opts {:class-dir class-dir
+              :jar-file  jar-file
+              :lib       lib
+              :basis     basis
+              :src-pom   "partial_pom.xml"
+              :version   version}]
+    (b/delete {:path target-dir})
+    (bb/jar opts)
+    (println jar-file "is ready.")
+    (b/copy-file {:src    (b/pom-path {:class-dir class-dir
+                                       :lib       lib})
+                  :target (str target-dir "/pom.xml")})
+    (-> opts
+        (assoc :pom-file (str target-dir "/pom.xml"))
+        (update :jar-file (comp #(.getCanonicalPath %) b/resolve-path)))))
 
 (defn deploy [args]
   (let [opts (jar args)]
@@ -129,7 +139,7 @@
   (convert/convert heroicons-dir "src")
 
   ; Builds a new version if needed
-  (build {})
+  (build {:override-version? false})
 
   ; Creates a new jar from the latest builds a new version if needed
   (jar {})
