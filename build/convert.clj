@@ -15,6 +15,9 @@
 (defn aria-attr? [k]
   (and k (str/starts-with? (name k) "aria-")))
 
+(defn data-attr? [k]
+  (and k (str/starts-with? (name k) "data-")))
+
 (def special-keywords
   {:clippath :clipPath
    :viewbox  :viewBox})
@@ -38,6 +41,9 @@
             (get special-keywords v)
 
             (aria-attr? v)
+            v
+
+            (data-attr? v)
             v
 
             :else
