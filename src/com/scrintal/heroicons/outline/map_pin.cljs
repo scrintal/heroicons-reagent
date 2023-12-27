@@ -7,7 +7,7 @@
          :strokeWidth "1.5"
          :stroke      "currentColor"
          :aria-hidden "true"
-         :dataSlot    "icon"}
+         :data-slot   "icon"}
    [:path {:strokeLinecap "round"
            :strokeLinejoin "round"
            :d "M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"}]
