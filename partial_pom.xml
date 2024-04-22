@@ -14,4 +14,10 @@
         <developerConnection>scm:git:ssh://git@github.com/scrintal/heroicons-reagent.git</developerConnection>
         <tag></tag>
     </scm>
+    <licenses>
+        <license>
+            <name>MIT License</name>
+            <url>https://opensource.org/license/MIT</url>
+        </license>
+    </licenses>
 </project>
