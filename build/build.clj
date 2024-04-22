@@ -37,11 +37,14 @@
    (latest-version nil)))
 
 (defn ensure-heroicons! []
-  (when-not (has-heroicons?)
-    (b/delete {:path heroicons-dir})
-    (b/git-process
-      {:git-command "git"
-       :git-args    ["clone" heroicons-repo heroicons-dir]})))
+  (if-not (has-heroicons?)
+    (do (b/delete {:path heroicons-dir})
+        (b/git-process
+         {:git-command "git"
+          :git-args    ["clone" heroicons-repo heroicons-dir]}))
+    (b/git-process {:git-command "git"
+                    :git-args ["fetch"]
+                    :dir heroicons-dir})))
 
 (defn needs-to-build? []
   (let [heroicons-version (latest-version heroicons-dir)
@@ -54,7 +57,7 @@
     (b/git-process
       {:git-command "git"
        :git-args    ["checkout" latest-version]
-       :dir         "heroicons"})
+       :dir         heroicons-dir})
     latest-version))
 
 (defn commit! [version]
