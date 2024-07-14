@@ -48,7 +48,7 @@ tag the commit with the same version number as the Heroicons.
 ### Install Locally
 To test the newly built library locally, use the following command:
 ```sh
-clj - T:build install
+clj -T:build install
 ```
 
 This will install the latest version to your local Maven repository.
@@ -57,7 +57,7 @@ This will install the latest version to your local Maven repository.
 After building a new version and testing it locally by installing it, the following command can be
 run to deploy the library to Clojars:
 ```sh
-clj - T:build deploy
+clj -T:build deploy
 ```
 
 ## License
